@@ -54,7 +54,7 @@
                                 name="duration"
                                 required
                                 id="contentDurationInput"
-                                value="{{ old('duration') }}"
+                                value="{{ $content->duration }}"
                             />
                         </div>
                         <div class="form-group">

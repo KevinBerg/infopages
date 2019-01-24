@@ -125,6 +125,7 @@ class ContentController extends Controller
         $content->description = $request->description;
         $content->status = boolval($request->status);
         $content->duration = $request->duration;
+        $content->type = $request->type;
 
         if(!empty($request->text)) {
             $content->text = $request->text;
