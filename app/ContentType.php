@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class ContentType extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'pages';
+    protected $table = 'content_types';
 
     public function contents()
     {
-        return $this->belongsToMany(Content::class);
+        return $this->belongsToMany('App\Content');
     }
 
 }

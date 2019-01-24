@@ -13,4 +13,21 @@ class Content extends Model
      */
     protected $table = 'contents';
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'start',
+        'end'
+    ];
+
+    public function pages()
+    {
+        return $this->belongsToMany('App\Page');
+    }
+
+    public function type()
+    {
+        return $this->hasOne('App\ContentType');
+    }
+
 }

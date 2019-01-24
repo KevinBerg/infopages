@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Create Page') }}</div>
+                <div class="card-header bg-primary text-white">{{ __('Create Page') }}</div>
                 <div class="card-body">
                     <form method="POST" action="/pages">
                         @csrf
@@ -16,6 +16,7 @@
                                 class="form-control {{ $errors->has('title') ? 'is-invalid' : ''}}"
                                 id="pageTitleInput"
                                 name="title"
+                                required
                                 placeholder="{{ __('Title') }}"
                                 value="{{ old('title') }}"
                             />
@@ -27,11 +28,12 @@
                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : ''}}"
                                 name="description"
                                 type="text"
+                                required
                                 id="pageDescriptionInput"
                                 value="{{ old('description') }}"
                             />
                         </div>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Create Page') }}</button>
                     </form>
                 </div>
             </div>

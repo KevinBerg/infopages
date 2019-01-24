@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Edit Page') }}</div>
+                <div class="card-header bg-success text-white">{{ __('Edit Page') }}</div>
                 <div class="card-body">
 
                     <form method="POST" action="/pages/{{ $page->id }}">
@@ -22,7 +22,28 @@
                         <input type="submit" class="btn btn-md btn-success" value="{{ __('Save') }}"/>
                     </form>
 
-                    <form method="POST" action="/pages/{{ $page->id }}" class="mt-3">
+                    <hr />
+
+                    @if ($page->contents()->count())
+
+                        <div class="mt-5">
+                            <h2>{{ __('Page Contents') }}</h2>
+                            <table class="table">
+                                <thead></
+                            </table>
+                                @foreach ($page->contents as $content)
+                                    <li>
+                                        {{ $content->title }}
+                                        <small>
+                                            {{ $content->description }}
+                                        </small>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="/pages/{{ $page->id }}" class="mt-5">
                         @method('DELETE')
                         @csrf
                         <input type="submit" class="btn btn-md btn-danger" value="{{ __('delete') }}"/>

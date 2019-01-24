@@ -5,11 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Pages') }}</div>
+                <div class="card-header bg-primary text-white">{{ __('Pages') }}</div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>{{ __('Title') }}</th>
                                 <th>{{ __('Description') }}</th>
                                 <th>{{ __('Created') }}</th>
@@ -19,6 +20,7 @@
                         <tbody>
                             @foreach ($pages as $page)
                                 <tr class="clickable" onclick="window.location.href = '/pages/{{ $page->id }}';">
+                                    <td>{{ $page->id }}</td>
                                     <td>{{ $page->title }}</td>
                                     <td>{{ $page->description }}</td>
                                     <td>{{ $page->created_at }}</td>

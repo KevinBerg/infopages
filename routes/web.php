@@ -6,3 +6,4 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::resource('pages', 'PageController');
+Route::resource('contents', 'ContentController');
