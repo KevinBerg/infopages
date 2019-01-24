@@ -33,7 +33,7 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label for="pageTypeInput">{{ __('Description') }}</label>
+                            <label for="pageTypeInput">{{ __('Type') }}</label>
                             <select
                                 class="form-control {{ $errors->has('type') ? 'is-invalid' : ''}}"
                                 name="type"
