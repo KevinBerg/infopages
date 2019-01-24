@@ -15,7 +15,8 @@ class ContentController extends Controller
     public function index()
     {
         $contents = Content::all();
-        return view('contents.index', compact('contents'));
+        $contentTypes = \Infopages\ContentType::all();
+        return view('contents.index', compact('contents', 'contentTypes'));
     }
 
     /**
@@ -42,6 +43,7 @@ class ContentController extends Controller
             'title' => ['required', 'min:3'],
             'description' => 'required',
             'type' => ['required', 'Integer'],
+            'duration' => ['required', 'Integer', 'min:30'],
             'text' => ['String'],
            # 'start' => ['date_format:d/m/Y'],
            # 'end' => ['Date']
@@ -52,6 +54,7 @@ class ContentController extends Controller
         $content->description = $request->description;
         $content->type = $request->type;
         $content->status = false;
+        $content->duration = $request->duration;
 
         if(!empty($request->text)) {
             $content->text = $request->text;
@@ -110,6 +113,7 @@ class ContentController extends Controller
             'title' => ['required', 'min:3'],
             'description' => 'required',
             'type' => ['required', 'Integer'],
+            'duration' => ['required', 'Integer', 'min:30'],
             'status' => ['Boolean', 'Nullable'],
             'text' => ['String'],
             # 'start' => ['date_format:d/m/Y'],
@@ -120,6 +124,7 @@ class ContentController extends Controller
         $content->title = $request->title;
         $content->description = $request->description;
         $content->status = boolval($request->status);
+        $content->duration = $request->duration;
 
         if(!empty($request->text)) {
             $content->text = $request->text;

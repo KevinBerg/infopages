@@ -27,7 +27,7 @@
                                     <td>{{ $content->id }}</td>
                                     <td>{{ $content->title }}</td>
                                     <td>{{ $content->description }}</td>
-                                    <td>{{ $content->type }}</td>
+                                    <td>{{ $contentTypes->find($content->type)->title }}</td>
                                     <td>{{ $content->status }}</td>
                                     <td>{{ $content->start }}</td>
                                     <td>{{ $content->end }}</td>

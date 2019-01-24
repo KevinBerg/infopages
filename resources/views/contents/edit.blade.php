@@ -34,7 +34,7 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label for="pageTypeInput">{{ __('Description') }}</label>
+                            <label for="pageTypeInput">{{ __('Type') }}</label>
                             <select
                                 class="form-control {{ $errors->has('type') ? 'is-invalid' : ''}}"
                                 name="type"
@@ -45,6 +45,17 @@
                                     <option value="{{ $contentType->id }}" {{ $content->type === $contentType->id ? 'selected' : '' }} >{{ $contentType->title }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contentDurationInput">{{ __('Duration') }} ({{ __('Seconds') }})</label>
+                            <input
+                                type="number"
+                                class="form-control {{ $errors->has('duration') ? 'is-invalid' : ''}}"
+                                name="duration"
+                                required
+                                id="contentDurationInput"
+                                value="{{ old('duration') }}"
+                            />
                         </div>
                         <div class="form-group">
                             <label for="contentStartInput">{{ __('Start') }}</label>
