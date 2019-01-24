@@ -22,26 +22,44 @@
                         <input type="submit" class="btn btn-md btn-success" value="{{ __('Save') }}"/>
                     </form>
 
-                    <hr />
-
                     @if ($page->contents()->count())
-
+                        <hr />
                         <div class="mt-5">
-                            <h2>{{ __('Page Contents') }}</h2>
+                            <h3>{{ __('Related Page Contents') }}</h3>
                             <table class="table">
-                                <thead></
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ __('Title') }}</th>
+                                        <th>{{ __('Description') }}</th>
+                                        <th>{{ __('Type') }}</th>
+                                        <th>{{ __('Status') }}</th>
+                                        <th>{{ __('Start') }}</th>
+                                        <th>{{ __('End') }}</th>
+                                        <th>{{ __('Created') }}</th>
+                                        <th>{{ __('Updated') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($page->contents as $content)
+                                        <tr class="clickable" onclick="window.location.href = '/contents/{{ $content->id }}';">
+                                            <td>{{ $content->id }}</td>
+                                            <td>{{ $content->title }}</td>
+                                            <td>{{ $content->description }}</td>
+                                            <td>{{ $content->type }}</td>
+                                            <td>{{ $content->status }}</td>
+                                            <td>{{ $content->start }}</td>
+                                            <td>{{ $content->end }}</td>
+                                            <td>{{ $content->created_at }}</td>
+                                            <td>{{ $content->updated_at }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
-                                @foreach ($page->contents as $content)
-                                    <li>
-                                        {{ $content->title }}
-                                        <small>
-                                            {{ $content->description }}
-                                        </small>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </div>
                     @endif
+
+                    <hr />
 
                     <form method="POST" action="/pages/{{ $page->id }}" class="mt-5">
                         @method('DELETE')

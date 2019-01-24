@@ -42,6 +42,7 @@ class ContentController extends Controller
             'title' => ['required', 'min:3'],
             'description' => 'required',
             'type' => ['required', 'Integer'],
+            'text' => ['String'],
            # 'start' => ['date_format:d/m/Y'],
            # 'end' => ['Date']
         ]);
@@ -51,6 +52,10 @@ class ContentController extends Controller
         $content->description = $request->description;
         $content->type = $request->type;
         $content->status = false;
+
+        if(!empty($request->text)) {
+            $content->text = $request->text;
+        }
 
         if(!empty($request->start)) {
             $content->start = $request->start;
@@ -100,22 +105,25 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-
-
         # Todo validate start and end date
         request()->validate([
             'title' => ['required', 'min:3'],
             'description' => 'required',
             'type' => ['required', 'Integer'],
             'status' => ['Boolean', 'Nullable'],
-           # 'start' => ['date_format:d/m/Y'],
-           # 'end' => ['Date']
-           'pages.*'  => ['required', 'string', 'distinct']
+            'text' => ['String'],
+            # 'start' => ['date_format:d/m/Y'],
+            # 'end' => ['Date']
+           'pages.*'  => ['required', 'Integer']
         ]);
 
         $content->title = $request->title;
         $content->description = $request->description;
         $content->status = boolval($request->status);
+
+        if(!empty($request->text)) {
+            $content->text = $request->text;
+        }
 
         if(!empty($request->start)) {
             $content->start = $request->start;
@@ -125,17 +133,8 @@ class ContentController extends Controller
             $content->end = $request->end;
         }
 
+        $content->pages()->sync($request->pages);
         $content->save();
-
-        /* todo use syncs
-        if(is_array($request->pages)) {
-            foreach($request->pages as $page) {
-                $contentPage = new \App\ContentPage();
-                $contentPage->content_id = $content->id;
-                $contentPage->page_id = $page;
-                $contentPage->save();
-            }
-        }*/
 
         return redirect('/contents');
     }
@@ -148,6 +147,7 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
-        //
+        $content->delete();
+        return redirect('/contents');
     }
 }

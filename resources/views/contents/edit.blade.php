@@ -67,6 +67,11 @@
                             />
                         </div>
 
+                        <div class="form-group">
+                            <label for="contentTextInput">{{ __('Text') }}</label>
+                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="contentTextInput" name="text" rows="3">{{ $content->text }}</textarea>
+                        </div>
+
                         @if ($pages->count())
                             <div class="form-group">
                                 <label for="contentPagesInput">{{ __('Pages') }}</label>
@@ -77,7 +82,7 @@
                                     id="contentPagesInput"
                                 >
                                     @foreach ($pages as $page)
-                                        <option value="{{ $page->id }}">{{ $page->title }}</option>
+                                        <option value="{{ $page->id }}" {{ $content->pages->contains($page->id) ? 'selected' : '' }}>{{ $page->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -98,7 +103,17 @@
                         <hr />
 
                         <button type="submit" class="btn btn-success">{{ __('Save') }}</button>
+
                     </form>
+
+                    <hr />
+
+                    <form method="POST" action="/contents/{{ $content->id }}" class="mt-3">
+                        @method('DELETE')
+                        @csrf
+                        <input type="submit" class="btn btn-md btn-danger" value="{{ __('delete') }}"/>
+                    </form>
+
                 </div>
             </div>
         </div>

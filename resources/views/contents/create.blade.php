@@ -65,6 +65,10 @@
                                 value="{{ old('end') }}"
                             />
                         </div>
+                        <div class="form-group">
+                            <label for="contentTextInput">{{ __('Text') }}</label>
+                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="contentTextInput" name="text" rows="3">{{ old('text') }}</textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary">{{ __('Create Content') }}</button>
                     </form>
                 </div>
