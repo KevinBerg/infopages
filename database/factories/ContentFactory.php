@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Content::class, function (Faker $faker) {
+$factory->define(Infopages\Content::class, function (Faker $faker) {
     return [
         //
     ];

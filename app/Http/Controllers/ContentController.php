@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Infopages\Http\Controllers;
 
-use App\Content;
+use Infopages\Content;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -25,7 +25,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        $contentTypes = \App\ContentType::all();
+        $contentTypes = \Infopages\ContentType::all();
         return view('contents.create', compact('contentTypes'));
     }
 
@@ -73,26 +73,26 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Content  $content
+     * @param  \Infopages\Content  $content
      * @return \Illuminate\Http\Response
      */
     public function show(Content $content)
     {
-        $pages = \App\Page::all();
-        $contentTypes = \App\ContentType::all();
+        $pages = \Infopages\Page::all();
+        $contentTypes = \Infopages\ContentType::all();
         return view('contents.edit', compact('content', 'contentTypes', 'pages'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Content  $content
+     * @param  \Infopages\Content  $content
      * @return \Illuminate\Http\Response
      */
     public function edit(Content $content)
     {
-        $pages = \App\Page::all();
-        $contentTypes = \App\ContentType::all();
+        $pages = \Infopages\Page::all();
+        $contentTypes = \Infopages\ContentType::all();
         return view('contents.edit', compact('content', 'contentTypes', 'pages'));
     }
 
@@ -100,7 +100,7 @@ class ContentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Content  $content
+     * @param  \Infopages\Content  $content
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Content $content)
@@ -142,7 +142,7 @@ class ContentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Content  $content
+     * @param  \Infopages\Content  $content
      * @return \Illuminate\Http\Response
      */
     public function destroy(Content $content)
