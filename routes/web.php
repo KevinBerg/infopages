@@ -1,7 +1,8 @@
 <?php
 
 Route::get('/', function () {
-    return redirect('/pages');
+    $pages = \App\Page::all();
+    return view('urls.show', compact('pages'));
 });
 
 Auth::routes();
