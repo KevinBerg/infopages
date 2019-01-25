@@ -15,8 +15,8 @@
                                 <th>{{ __('Description') }}</th>
                                 <th>{{ __('Type') }}</th>
                                 <th>{{ __('Status') }}</th>
-                                <th>{{ __('Start') }}</th>
-                                <th>{{ __('End') }}</th>
+                                <th>{{ __('Duration') }} ({{ __('Seconds') }})</th>
+                                <th>{{ __('Runtime') }} ({{ __('Days') }})</th>
                                 <th>{{ __('Created') }}</th>
                                 <th>{{ __('Updated') }}</th>
                             </tr>
@@ -28,9 +28,9 @@
                                     <td>{{ $content->title }}</td>
                                     <td>{{ $content->description }}</td>
                                     <td>{{ $contentTypes->find($content->type)->title }}</td>
-                                    <td>{{ $content->status }}</td>
-                                    <td>{{ $content->start }}</td>
-                                    <td>{{ $content->end }}</td>
+                                    <td>{{ $content->status == true ? __('Yes') : __('No') }}</td>
+                                    <td>{{ $content->duration }}</td>
+                                    <td>{{ $content->runtime }}</td>
                                     <td>{{ $content->created_at }}</td>
                                     <td>{{ $content->updated_at }}</td>
                                 </tr>
