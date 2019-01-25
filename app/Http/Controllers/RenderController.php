@@ -56,11 +56,16 @@ class RenderController extends Controller
 
                     return view('templates.text', compact('content'));
 
+                } else {
+                    abort(403, 'Sorry, I have no contents for this page.');
                 }
+
+            } else {
+                abort(403, 'Sorry, I have no page with this title.');
             }
+
+        } else {
+            abort(404, 'Sorry, I can\'t accept this URL');
         }
-
-        abort(404);
-
     }
 }
