@@ -25,6 +25,9 @@ class RenderController extends Controller
 
                 if($contents) {
 
+                    # filter active contents.
+                    $contents = $contents->where('status', 1);
+
                     # try to find a existing entry in the RenderedPageContent table for this page.
                     $renderedPageContent = \App\RenderedPageContent::where('page_id', $page->id)->first();
 
