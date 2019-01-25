@@ -59,7 +59,13 @@ class RenderController extends Controller
                     $renderedPageContent->updated_at = now();
                     $renderedPageContent->save();
 
-                    return view('templates.text', compact('content'));
+                    $template = \App\ContentType::find($content->type)->first();
+
+                    if($template) {
+                        return view('templates.'.$template->title, compact('content'));
+                    } else {
+                        abort(403, 'Sorry, I have no template for this page.');
+                    }
 
                 } else {
                     abort(403, 'Sorry, I have no contents for this page.');
@@ -70,7 +76,7 @@ class RenderController extends Controller
             }
 
         } else {
-            abort(404, 'Sorry, I can\'t accept this URL');
+            abort(404);
         }
     }
 }

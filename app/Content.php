@@ -22,7 +22,7 @@ class Content extends Model
 
     public function pages()
     {
-        return $this->belongsToMany('App\Page')->withTimestamps();
+        return $this->belongsToMany('App\Page');
     }
 
     public function type()
