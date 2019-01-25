@@ -48,10 +48,12 @@ class RenderController extends Controller
                         $content = $contents->first();
                         $renderedPageContent = new \App\RenderedPageContent();
                         $renderedPageContent->page_id = $page->id;
+                        $renderedPageContent->created_at = now();
 
                     }
 
                     $renderedPageContent->content_id = $content->id;
+                    $renderedPageContent->updated_at = now();
                     $renderedPageContent->save();
 
                     return view('templates.text', compact('content'));
