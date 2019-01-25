@@ -57,7 +57,8 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        return view('pages.edit', compact('page'));
+        $contentTypes = \App\ContentType::all(); # used to render related content types.
+        return view('pages.edit', compact('page', 'contentTypes'));
     }
 
     /**
@@ -68,7 +69,8 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('pages.edit', compact($page));
+        $contentTypes = \App\ContentType::all(); # used to render related content types.
+        return view('pages.edit', compact('page', 'contentTypes'));
     }
 
     /**

@@ -17,13 +17,14 @@
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Duration') }} ({{ __('Seconds') }})</th>
                                 <th>{{ __('Runtime') }} ({{ __('Days') }})</th>
+                                <th>{{ __('Pages') }}</th>
                                 <th>{{ __('Created') }}</th>
                                 <th>{{ __('Updated') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($contents as $content)
-                                <tr class="clickable" onclick="window.location.href = '{{ url('contents', [$content->id] ) }}';">
+                                <tr class="clickable {{ $content->status == true ? 'text-white bg-success' : '' }}" onclick="window.location.href = '{{ url('contents', [$content->id] ) }}';">
                                     <td>{{ $content->id }}</td>
                                     <td>{{ $content->title }}</td>
                                     <td>{{ $content->description }}</td>
@@ -31,6 +32,13 @@
                                     <td>{{ $content->status == true ? __('Yes') : __('No') }}</td>
                                     <td>{{ $content->duration }}</td>
                                     <td>{{ $content->runtime }}</td>
+                                    <td>
+                                        @if ( $content->pages )
+                                            @foreach ($content->pages as $page)
+                                                <p>{{ $page->title }}</p>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ $content->created_at }}</td>
                                     <td>{{ $content->updated_at }}</td>
                                 </tr>

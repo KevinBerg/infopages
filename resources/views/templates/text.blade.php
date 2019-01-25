@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TODO</title>
+    <title>{{ $content->title }}</title>
 	<meta charset="utf-8">
-	<META HTTP-EQUIV="refresh" CONTENT="TODO">
-    <link href="{{ asset('css/text.css') }}" rel="stylesheet">
+	<META HTTP-EQUIV="refresh" CONTENT="{{ $content->duration }}">
+    <link href="{{ asset('css/text_and_image.css') }}" rel="stylesheet">
 </head>
 <body>
 	<div class="header">TODO</div>
