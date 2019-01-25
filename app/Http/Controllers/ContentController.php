@@ -64,8 +64,8 @@ class ContentController extends Controller
     public function show(Content $content)
     {
         $pages = \App\Page::all();
-        $contentTypes = \App\ContentType::all();
-        return view('contents.edit', compact('content', 'contentTypes', 'pages'));
+        $contentTypeTitle = $this->getContentTypeTitle($content);
+        return view('contents.edit', compact('content', 'contentTypeTitle', 'pages'));
     }
 
     /**
@@ -77,8 +77,8 @@ class ContentController extends Controller
     public function edit(Content $content)
     {
         $pages = \App\Page::all();
-        $contentTypes = \App\ContentType::all();
-        return view('contents.edit', compact('content', 'contentTypes', 'pages'));
+        $contentTypeTitle = $this->getContentTypeTitle($content);
+        return view('contents.edit', compact('content', 'contentTypeTitle', 'pages'));
     }
 
     /**
@@ -126,5 +126,19 @@ class ContentController extends Controller
     {
         $content->delete();
         return redirect('/contents');
+    }
+
+    private function getContentTypeTitle(Content $content) {
+
+        $contentTypeTitle = false;
+
+        if(isset($content->type)) {
+            $contentType = \App\ContentType::find($content->type)->first();
+            if($contentType) {
+                $contentTypeTitle = $contentType->title;
+            }
+        }
+
+        return $contentTypeTitle;
     }
 }

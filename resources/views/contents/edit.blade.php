@@ -35,17 +35,14 @@
                         </div>
                         <div class="form-group">
                             <label for="pageTypeInput">{{ __('Type') }}</label>
-                            <select
-                                class="form-control {{ $errors->has('type') ? 'is-invalid' : ''}}"
-                                name="type"
-                                required
+                            <input
+                                type="text"
+                                class="form-control"
+                                name=""
                                 disabled
-                                id="contentType"
-                            >
-                                @foreach ($contentTypes as $contentType)
-                                    <option value="{{ $contentType->id }}" {{ $content->type === $contentType->id ? 'selected' : '' }} >{{ $contentType->title }}</option>
-                                @endforeach
-                            </select>
+                                id="pageTypeInput"
+                                value="{{ $contentTypeTitle }}"
+                            />
                         </div>
                         <div class="form-group">
                             <label for="contentDurationInput">{{ __('Duration') }} ({{ __('Seconds') }})</label>
