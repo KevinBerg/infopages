@@ -1,8 +1,8 @@
 <?php
 
-namespace Infopages\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Infopages\Page;
+use App\Page;
 use Illuminate\Http\Request;
 
 class RenderController extends Controller
@@ -14,7 +14,7 @@ class RenderController extends Controller
     public function render(String $pageTitle) {
 
         if(ctype_alnum($pageTitle)) {
-            $page = \Infopages\Page::where('title', $pageTitle)->first();
+            $page = \App\Page::where('title', $pageTitle)->first();
             if($page) {
                 $contents = $page->contents;
                 if($contents) {

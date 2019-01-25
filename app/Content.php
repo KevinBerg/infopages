@@ -1,6 +1,6 @@
 <?php
 
-namespace Infopages;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,12 +22,12 @@ class Content extends Model
 
     public function pages()
     {
-        return $this->belongsToMany('Infopages\Page');
+        return $this->belongsToMany('App\Page');
     }
 
     public function type()
     {
-        return $this->hasOne('Infopages\ContentType');
+        return $this->hasOne('App\ContentType');
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Infopages\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Infopages\Page;
+use App\Page;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,7 +14,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = \Infopages\Page::all();
+        $pages = \App\Page::all();
         return view('pages.index', compact('pages'));
     }
 
@@ -52,7 +52,7 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Infopages\Page  $page
+     * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
     public function show(Page $page)
@@ -63,7 +63,7 @@ class PageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Infopages\Page  $page
+     * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
     public function edit(Page $page)
@@ -75,7 +75,7 @@ class PageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Infopages\Page  $page
+     * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Page $page)
@@ -103,7 +103,7 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Infopages\Page  $page
+     * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
     public function destroy(Page $page)
