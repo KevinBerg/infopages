@@ -5,3 +5,7 @@
 .clickable:hover{
     font-weight: bold;
 }
+
+.checkbox-wrapper{
+    padding: .375rem .75rem;
+}

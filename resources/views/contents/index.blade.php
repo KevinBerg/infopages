@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                             @foreach ($contents as $content)
-                                <tr class="clickable" onclick="window.location.href = '/contents/{{ $content->id }}';">
+                                <tr class="clickable" onclick="window.location.href = '{{ url('contents', [$content->id] ) }}';">
                                     <td>{{ $content->id }}</td>
                                     <td>{{ $content->title }}</td>
                                     <td>{{ $content->description }}</td>
@@ -37,7 +37,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="button" class="btn btn-primary" value="{{ __('Create Content') }}" onclick="window.location.href = '/contents/create';"/>
+                    <input type="button" class="btn btn-primary" value="{{ __('Create Content') }}" onclick="window.location.href = '{{ url('contents/create') }}';"/>
                 </div>
             </div>
         </div>

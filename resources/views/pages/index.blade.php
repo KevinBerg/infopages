@@ -19,7 +19,7 @@
                         </thead>
                         <tbody>
                             @foreach ($pages as $page)
-                                <tr class="clickable" onclick="window.location.href = '/pages/{{ $page->id }}';">
+                                <tr class="clickable" onclick="window.location.href = '{{ url('pages', [$page->id] ) }}';">
                                     <td>{{ $page->id }}</td>
                                     <td>{{ $page->title }}</td>
                                     <td>{{ $page->description }}</td>
@@ -29,7 +29,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="button" class="btn btn-primary" value="{{ __('Create Page') }}" onclick="window.location.href = '/pages/create';"/>
+                    <input type="button" class="btn btn-primary" value="{{ __('Create Page') }}" onclick="window.location.href = '{{ url('pages/create') }}';"/>
                 </div>
             </div>
         </div>

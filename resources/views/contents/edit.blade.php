@@ -88,16 +88,20 @@
                             </div>
                         @endif
 
-                        <div class="form-group">
-                            <label for="contentStatusInput">{{ __('Status') }}</label>
-                            <input
-                                type="checkbox"
-                                class="form-control {{ $errors->has('status') ? 'is-invalid' : ''}}"
-                                name="status"
-                                id="contentStatusInput"
-                                value="1"
-                                {{ $content->status == true ? 'checked' : '' }}
-                            />
+                        <hr />
+
+                        <div class="form-group text-left">
+                            <label for="contentStatusInput">{{ __('Content is active?') }}</label>
+                            <div class="checkbox-wrapper">
+                                <input
+                                    type="checkbox"
+                                    class="{{ $errors->has('status') ? 'is-invalid' : ''}}"
+                                    name="status"
+                                    id="contentStatusInput"
+                                    value="1"
+                                    {{ $content->status == true ? 'checked' : '' }}
+                                />
+                            </div>
                         </div>
 
                         <hr />
