@@ -80,22 +80,12 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        # TODO more validation
-        $updated = false;
+        request()->validate([
+            'description' => 'required'
+        ]);
 
-        if( ! empty($request->title)) {
-            $page->title = $request->title;
-            $updated = true;
-        }
-
-        if( ! empty($request->description)) {
-            $page->description = $request->description;
-            $updated = true;
-        }
-
-        if($updated) {
-            $page->save();
-        }
+        $page->description = $request->description;
+        $page->save();
 
         return redirect('/pages');
     }

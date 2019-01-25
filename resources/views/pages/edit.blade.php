@@ -13,7 +13,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="pageTitleInput">{{ __('Title') }}</label>
-                            <input type="text" class="form-control" id="pageTitleInput" name="title" required placeholder="{{ __('Title') }}" value="{{ $page->title }}" />
+                            <input type="text" disabled class="form-control" id="pageTitleInput" required placeholder="{{ __('Title') }}" value="{{ $page->title }}" />
                         </div>
                         <div class="form-group">
                             <label for="pageDescriptionInput">{{ __('Description') }}</label>
@@ -21,6 +21,10 @@
                         </div>
                         <input type="submit" class="btn btn-md btn-success" value="{{ __('Save') }}"/>
                     </form>
+
+                    <div class="alert alert-success mt-3" role="alert">
+                        {{ __('Click here') }} <a href="{{ url('render', [$page->title]) }}" class="alert-link">{{ url('render', [$page->title]) }}</a> {{ __('to open the view') }}.
+                    </div>
 
                     @if ($page->contents()->count())
                         <hr />
