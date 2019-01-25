@@ -13,6 +13,9 @@ class RenderController extends Controller
      */
     public function render(String $pageTitle) {
 
+        # ToDo use content priority!!
+        # Todo use runtime!!
+
         # just accept alphanumeric strings for page titles.
         if(ctype_alnum($pageTitle)) {
 
@@ -24,9 +27,11 @@ class RenderController extends Controller
                 $contents = $page->contents;
 
                 if($contents) {
-
                     # filter active contents.
                     $contents = $contents->where('status', 1);
+                }
+
+                if($contents->count()) {
 
                     # try to find a existing entry in the RenderedPageContent table for this page.
                     $renderedPageContent = \App\RenderedPageContent::where('page_id', $page->id)->first();
