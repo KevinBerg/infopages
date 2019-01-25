@@ -52,7 +52,12 @@ class ContentController extends Controller
 
         $content->save();
 
+        if(isset($content->id)) {
+            return redirect('/contents/'.$content->id);
+        }
+
         return redirect('/contents');
+
     }
 
     /**
@@ -135,7 +140,7 @@ class ContentController extends Controller
         $contentTypeTitle = false;
 
         if(isset($content->type)) {
-            $contentType = \App\ContentType::find($content->type)->first();
+            $contentType = \App\ContentType::find($content->type);
             if($contentType) {
                 $contentTypeTitle = $contentType->title;
             }

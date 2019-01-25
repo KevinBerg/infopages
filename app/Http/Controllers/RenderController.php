@@ -59,12 +59,12 @@ class RenderController extends Controller
                     $renderedPageContent->updated_at = now();
                     $renderedPageContent->save();
 
-                    $template = \App\ContentType::find($content->type)->first();
+                    $contentType = \App\ContentType::find($content->type);
 
-                    if($template) {
-                        return view('templates.'.$template->title, compact('content'));
+                    if($contentType && !empty($contentType->title)) {
+                        return view('templates.'.$contentType->title, compact('content'));
                     } else {
-                        abort(403, 'Sorry, I have no template for this page.');
+                        abort(403, 'Sorry, the content has an invalid type.');
                     }
 
                 } else {
