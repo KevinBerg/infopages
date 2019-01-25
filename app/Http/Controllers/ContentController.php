@@ -38,15 +38,10 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        # Todo validate start and end date
         request()->validate([
-            'title' => ['required', 'min:3'],
+            'title' => ['required', 'min:3', 'unique:contents,title'],
             'description' => 'required',
             'type' => ['required', 'Integer'],
-            'duration' => ['required', 'Integer', 'min:30'],
-            'text' => ['String'],
-           # 'start' => ['date_format:d/m/Y'],
-           # 'end' => ['Date']
         ]);
 
         $content = new Content();
@@ -54,19 +49,6 @@ class ContentController extends Controller
         $content->description = $request->description;
         $content->type = $request->type;
         $content->status = false;
-        $content->duration = $request->duration;
-
-        if(!empty($request->text)) {
-            $content->text = $request->text;
-        }
-
-        if(!empty($request->start)) {
-            $content->start = $request->start;
-        }
-
-        if(!empty($request->end)) {
-            $content->end = $request->end;
-        }
 
         $content->save();
 
@@ -108,35 +90,24 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-        # Todo validate start and end date
         request()->validate([
             'title' => ['required', 'min:3'],
             'description' => 'required',
-            'type' => ['required', 'Integer'],
             'duration' => ['required', 'Integer', 'min:30'],
             'status' => ['Boolean', 'Nullable'],
             'text' => ['String'],
-            # 'start' => ['date_format:d/m/Y'],
-            # 'end' => ['Date']
-           'pages.*'  => ['required', 'Integer']
+            'runtime' => ['required', 'Integer', 'min:1'],
+            'pages.*'  => ['required', 'Integer']
         ]);
 
         $content->title = $request->title;
         $content->description = $request->description;
         $content->status = boolval($request->status);
         $content->duration = $request->duration;
-        $content->type = $request->type;
+        $content->runtime = $request->runtime;
 
         if(!empty($request->text)) {
             $content->text = $request->text;
-        }
-
-        if(!empty($request->start)) {
-            $content->start = $request->start;
-        }
-
-        if(!empty($request->end)) {
-            $content->end = $request->end;
         }
 
         $content->pages()->sync($request->pages);

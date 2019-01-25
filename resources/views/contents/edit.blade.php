@@ -19,7 +19,7 @@
                                 name="title"
                                 required
                                 placeholder="{{ __('Title') }}"
-                                value="{{ $content->title }}"
+                                value="{{ (old('title')) ? old('title') :  $content->title }}"
                             />
                         </div>
                         <div class="form-group">
@@ -30,7 +30,7 @@
                                 name="description"
                                 required
                                 id="contentDescriptionInput"
-                                value="{{ $content->description }}"
+                                value="{{ (old('description')) ? old('description') :  $content->description }}"
                             />
                         </div>
                         <div class="form-group">
@@ -39,6 +39,7 @@
                                 class="form-control {{ $errors->has('type') ? 'is-invalid' : ''}}"
                                 name="type"
                                 required
+                                disabled
                                 id="contentType"
                             >
                                 @foreach ($contentTypes as $contentType)
@@ -54,33 +55,24 @@
                                 name="duration"
                                 required
                                 id="contentDurationInput"
-                                value="{{ $content->duration }}"
+                                value="{{ (old('duration')) ? old('duration') :  $content->duration }}"
                             />
                         </div>
+
                         <div class="form-group">
-                            <label for="contentStartInput">{{ __('Start') }}</label>
+                            <label for="contentRuntimeInput">{{ __('Runtime') }} ({{ __('Days') }})</label>
                             <input
-                                type="datetime-local"
-                                class="form-control {{ $errors->has('start') ? 'is-invalid' : ''}}"
-                                name="start"
-                                id="contentStartInput"
-                                value="{{ $content->start }}"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="contentEndInput">{{ __('End') }}</label>
-                            <input
-                                type="datetime-local"
-                                class="form-control {{ $errors->has('start') ? 'is-invalid' : ''}}"
-                                name="end"
-                                id="contentEndInput"
-                                value="{{ $content->end }}"
+                                type="number"
+                                class="form-control {{ $errors->has('runtime') ? 'is-invalid' : ''}}"
+                                name="runtime"
+                                id="contentRuntimeInput"
+                                value="{{ (old('runtime')) ? old('runtime') :  $content->runtime }}"
                             />
                         </div>
 
                         <div class="form-group">
                             <label for="contentTextInput">{{ __('Text') }}</label>
-                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="contentTextInput" name="text" rows="3">{{ $content->text }}</textarea>
+                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="contentTextInput" name="text" rows="3">{{ (old('text')) ? old('text') :  $content->text }}</textarea>
                         </div>
 
                         @if ($pages->count())

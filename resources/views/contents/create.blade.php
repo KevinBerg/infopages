@@ -45,41 +45,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="contentDurationInput">{{ __('Duration') }} ({{ __('Seconds') }})</label>
-                            <input
-                                type="number"
-                                class="form-control {{ $errors->has('duration') ? 'is-invalid' : ''}}"
-                                name="duration"
-                                required
-                                id="contentDurationInput"
-                                value="{{ old('duration') }}"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="contentStartInput">{{ __('Start') }}</label>
-                            <input
-                                type="datetime-local"
-                                class="form-control {{ $errors->has('start') ? 'is-invalid' : ''}}"
-                                name="start"
-                                id="contentStartInput"
-                                value="{{ old('start') }}"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="contentEndInput">{{ __('End') }}</label>
-                            <input
-                                type="datetime-local"
-                                class="form-control {{ $errors->has('start') ? 'is-invalid' : ''}}"
-                                name="end"
-                                id="contentEndInput"
-                                value="{{ old('end') }}"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="contentTextInput">{{ __('Text') }}</label>
-                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="contentTextInput" name="text" rows="3">{{ old('text') }}</textarea>
-                        </div>
                         <button type="submit" class="btn btn-primary">{{ __('Create Content') }}</button>
                     </form>
                 </div>
