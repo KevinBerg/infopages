@@ -44,6 +44,20 @@
                                 value="{{ $contentTypeTitle }}"
                             />
                         </div>
+
+                            <div class="form-group">
+                                <label for="contentPriorityInput">{{ __('Pages') }}</label>
+                                <select
+                                    class="form-control {{ $errors->has('priority') ? 'is-invalid' : ''}}"
+                                    name="priority"
+                                    id="contentPriorityInput"
+                                >
+                                    <option value="1" {{ $content->priority === 1 ? 'selected' : '' }}>{{ __('High') }}</option>
+                                    <option value="2" {{ $content->priority === 2 ? 'selected' : '' }}>{{ __('Normal') }}</option>
+                                    <option value="3" {{ $content->priority === 3 ? 'selected' : '' }}>{{ __('Low') }}</option>
+                                </select>
+                            </div>
+
                         <div class="form-group">
                             <label for="contentDurationInput">{{ __('Duration') }} ({{ __('Seconds') }})</label>
                             <input

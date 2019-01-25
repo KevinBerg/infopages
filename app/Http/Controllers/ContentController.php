@@ -97,7 +97,8 @@ class ContentController extends Controller
             'status' => ['Boolean', 'Nullable'],
             'text' => ['String'],
             'runtime' => ['required', 'Integer', 'min:1'],
-            'pages.*'  => ['required', 'Integer']
+            'pages.*'  => ['required', 'Integer'],
+            'priority' => ['required', 'Integer', 'min:1', 'max:3']
         ]);
 
         $content->title = $request->title;
@@ -105,6 +106,7 @@ class ContentController extends Controller
         $content->status = boolval($request->status);
         $content->duration = $request->duration;
         $content->runtime = $request->runtime;
+        $content->priority = $request->priority;
 
         if(!empty($request->text)) {
             $content->text = $request->text;
