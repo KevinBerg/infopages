@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContentTypeSeeder::class);
         $this->call(ContentSeeder::class);
         $this->call(PageSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
 
@@ -23,12 +24,12 @@ class ContentTypeSeeder extends Seeder {
     {
         App\ContentType::create([
             'title' => 'text',
-            'description' => 'Just for Text...'
+            'description' => 'Just text'
         ]);
 
         App\ContentType::create([
             'title' => 'text_and_image',
-            'description' => 'Text with an image'
+            'description' => 'Text with image'
         ]);
 
     }
@@ -40,10 +41,13 @@ class ContentSeeder extends Seeder {
     public function run()
     {
         App\Content::create([
-            'title' => 'der erste',
-            'description' => 'asdf',
-            'type' => 1,
-            'status' => 0
+            'title' => 'First Content',
+            'description' => 'This is the description of the first content.',
+            'type' => 1, # text type
+            'status' => 1,
+            'duration' => 30,
+            'runtime' => 5,
+            'text' => 'This is the content area!'
         ]);
 
     }
@@ -55,8 +59,22 @@ class PageSeeder extends Seeder {
     public function run()
     {
         App\Page::create([
-            'title' => 'erste page',
-            'description' => 'asdf'
+            'title' => 'test',
+            'description' => 'this is just a test page.'
+        ]);
+
+    }
+
+}
+
+class UserSeeder extends Seeder {
+
+    public function run()
+    {
+        App\User::create([
+            'name' => 'admin',
+            'email' => 'chuck@norris.com',
+            'password' => Hash::make('secret')
         ]);
 
     }
