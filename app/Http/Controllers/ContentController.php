@@ -103,8 +103,20 @@ class ContentController extends Controller
             'text' => ['String'],
             'runtime' => ['required', 'Integer', 'min:1'],
             'pages.*'  => ['required', 'Integer'],
-            'priority' => ['required', 'Integer', 'min:1', 'max:3']
+            'priority' => ['required', 'Integer', 'min:1', 'max:3'],
         ]);
+
+        # validate image file if exists.
+        if($this->getContentTypeTitle($content) === 'text_and_image') {
+            request()->validate([
+                'image' => ['required', 'mimes:jpeg,jpg,png,PNG,JPEG,JPG']
+            ]);
+
+            $imagePath = public_path().'/uploads/contents/'.$content->id.'/image/';
+            $request->image->move($imagePath, $request->image->getClientOriginalName());
+            $content->image = $request->image->getClientOriginalName();
+
+        }
 
         $content->title = $request->title;
         $content->description = $request->description;
