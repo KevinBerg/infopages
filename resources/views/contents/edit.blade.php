@@ -102,6 +102,30 @@
                             </div>
                         @endif
 
+                        <div class="form-group">
+                            <label for="contentCreatedAtInput">{{ __('Created at') }}</label>
+                            <input
+                                type="datetime-local"
+                                class="form-control {{ $errors->has('created_at') ? 'is-invalid' : ''}}"
+                                name="created_at"
+                                id="contentCreatedAtInput"
+                                value="{{ $content->created_at}}"
+                                disabled
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contentUpdatedAtInput">{{ __('Updated at') }}</label>
+                            <input
+                                type="datetime-local"
+                                class="form-control {{ $errors->has('updated_at') ? 'is-invalid' : ''}}"
+                                name="updated_at"
+                                id="contentUpdatedAtInput"
+                                value="{{ $content->updated_at}}"
+                                disabled
+                            />
+                        </div>
+
                         <hr />
 
                         <div class="form-group text-left">
