@@ -37,7 +37,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'title' => ['required', 'min:3'],
+            'title' => ['required', 'min:3', 'alpha'],
             'description' => 'required'
         ]);
 
