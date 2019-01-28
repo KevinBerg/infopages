@@ -69,15 +69,15 @@ class RenderController extends Controller
                     if($contentType && !empty($contentType->title)) {
                         return view('templates.'.$contentType->title, compact('content'));
                     } else {
-                        abort(403, 'Sorry, the content has an invalid type.');
+                        abort(503, 'Sorry, the content has an invalid type.');
                     }
 
                 } else {
-                    abort(403, 'Sorry, I have no contents for this page.');
+                    abort(503, 'Sorry, I have no contents for this page.');
                 }
 
             } else {
-                abort(403, 'Sorry, I have no page with this title.');
+                abort(503, 'Sorry, I have no page with this title.');
             }
 
         } else {

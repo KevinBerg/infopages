@@ -46,6 +46,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        # custom template for 503 (can't render page).
+        if($this->isHttpException($exception)) {
+            if($exception->getStatusCode() === 503) {
+                # return a view with http refresh after 60 seconds.
+                return response()->view('errors.503', ['message' => $exception->getMessage()], 503);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }
