@@ -70,7 +70,7 @@ class ContentController extends Controller
     {
         $pages = \App\Page::all();
         $contentTypeTitle = $this->getContentTypeTitle($content);
-        return view('contents.edit', compact('content', 'contentTypeTitle', 'pages'));
+        return view('contents.'.$contentTypeTitle.'_edit', compact('content', 'contentTypeTitle', 'pages'));
     }
 
     /**
@@ -83,7 +83,7 @@ class ContentController extends Controller
     {
         $pages = \App\Page::all();
         $contentTypeTitle = $this->getContentTypeTitle($content);
-        return view('contents.edit', compact('content', 'contentTypeTitle', 'pages'));
+        return view('contents.'.$contentTypeTitle.'_edit', compact('content', 'contentTypeTitle', 'pages'));
     }
 
     /**
