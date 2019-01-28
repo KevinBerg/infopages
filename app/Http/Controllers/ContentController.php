@@ -108,14 +108,19 @@ class ContentController extends Controller
 
         # validate image file if exists.
         if($this->getContentTypeTitle($content) === 'text_and_image') {
-            request()->validate([
-                'image' => ['required', 'mimes:jpeg,jpg,png,PNG,JPEG,JPG']
-            ]);
 
-            $imagePath = public_path().'/uploads/contents/'.$content->id.'/image/';
-            $request->image->move($imagePath, $request->image->getClientOriginalName());
-            $content->image = $request->image->getClientOriginalName();
+            # validate image just when the request context has one or the content has NO image yet.
+            if(!empty($request->image) || empty($content->image)) {
 
+                request()->validate([
+                    'image' => ['required', 'mimes:jpeg,jpg,png,PNG,JPEG,JPG']
+                ]);
+
+                $imagePath = public_path().'/uploads/contents/'.$content->id.'/image/';
+                $request->image->move($imagePath, $request->image->getClientOriginalName());
+                $content->image = $request->image->getClientOriginalName();
+
+            }
         }
 
         $content->title = $request->title;
