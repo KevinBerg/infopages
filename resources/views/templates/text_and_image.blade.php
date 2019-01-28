@@ -10,8 +10,9 @@
 	<div class="header">TODO</div>
 	<div class="content">
 		<div class="textContent">
-                IMAGE TEXT TYPE
-			    {{ $content->text }}
+                IMAGE TEXT TYPE X
+			    {{ $content->text }} {{ $content->getImagePath() }}
+				<img src="{{ $content->getImagePath() }}" width="400px" height="400px" />
 			<br/><br/>
 		</div>
 	</div>

@@ -116,7 +116,7 @@ class ContentController extends Controller
                     'image' => ['required', 'mimes:jpeg,jpg,png,PNG,JPEG,JPG']
                 ]);
 
-                $imagePath = public_path().'/uploads/contents/'.$content->id.'/image/';
+                $imagePath = $content->getImageStoragePath();
                 $request->image->move($imagePath, $request->image->getClientOriginalName());
                 $content->image = $request->image->getClientOriginalName();
 
