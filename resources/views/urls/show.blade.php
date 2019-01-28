@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-primary text-white">{{ __('Pages') }}</div>
+                <div class="card-header bg-primary text-white">{{ __('Page and Content overview') }}</div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
