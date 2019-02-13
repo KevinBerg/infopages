@@ -115,7 +115,7 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $page)
+    public function destroy(Request $request, Page $page)
     {
         if( ! $request->user()->hasPermissionTo('edit pages')) {
             abort(403);
