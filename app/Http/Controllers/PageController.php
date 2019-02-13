@@ -60,8 +60,12 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show(Request $request, Page $page)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         $contentTypes = \App\ContentType::all(); # used to render related content types.
         return view('pages.edit', compact('page', 'contentTypes'));
     }

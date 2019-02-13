@@ -72,6 +72,10 @@ class ContentController extends Controller
      */
     public function show(Request $request, Content $content)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         $pages = \App\Page::all();
         $contentTypeTitle = $this->getContentTypeTitle($content);
         return view('contents.'.$contentTypeTitle.'_edit', compact('content', 'contentTypeTitle', 'pages'));
