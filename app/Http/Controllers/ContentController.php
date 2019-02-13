@@ -38,6 +38,10 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         request()->validate([
             'title' => ['required', 'min:3', 'unique:contents,title'],
             'description' => 'required',
@@ -66,7 +70,7 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function show(Content $content)
+    public function show(Request $request, Content $content)
     {
         $pages = \App\Page::all();
         $contentTypeTitle = $this->getContentTypeTitle($content);
@@ -79,8 +83,12 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function edit(Content $content)
+    public function edit(Request $request, Content $content)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         $pages = \App\Page::all();
         $contentTypeTitle = $this->getContentTypeTitle($content);
         return view('contents.'.$contentTypeTitle.'_edit', compact('content', 'contentTypeTitle', 'pages'));
@@ -95,6 +103,10 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         request()->validate([
             'title' => ['required', 'min:3'],
             'description' => 'required',
@@ -146,8 +158,12 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy(Request $request, Content $content)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         $content->delete();
         return redirect('/contents');
     }
