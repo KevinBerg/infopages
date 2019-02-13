@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -36,6 +37,10 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         request()->validate([
             'title' => ['required', 'min:3', 'alpha'],
             'description' => 'required'
@@ -55,8 +60,12 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show(Request $request, Page $page)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         $contentTypes = \App\ContentType::all(); # used to render related content types.
         return view('pages.edit', compact('page', 'contentTypes'));
     }
@@ -67,8 +76,12 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(Request $request, Page $page)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         $contentTypes = \App\ContentType::all(); # used to render related content types.
         return view('pages.edit', compact('page', 'contentTypes'));
     }
@@ -82,6 +95,10 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         request()->validate([
             'description' => 'required'
         ]);
@@ -100,6 +117,10 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         $page->delete();
         return redirect('/pages');
     }
