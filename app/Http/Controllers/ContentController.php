@@ -24,8 +24,12 @@ class ContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if( ! $request->user()->hasPermissionTo('edit contents')) {
+            abort(403);
+        }
+
         $contentTypes = \App\ContentType::all();
         return view('contents.create', compact('contentTypes'));
     }

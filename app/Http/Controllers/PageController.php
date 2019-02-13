@@ -24,8 +24,12 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if( ! $request->user()->hasPermissionTo('edit pages')) {
+            abort(403);
+        }
+
         return view('pages.create');
     }
 
