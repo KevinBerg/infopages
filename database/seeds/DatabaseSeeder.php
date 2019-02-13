@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ContentSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(SetPermissionSeeder::class);
     }
 }
 
@@ -72,11 +77,63 @@ class UserSeeder extends Seeder {
     public function run()
     {
         App\User::create([
+            'id' => 1,
             'name' => 'admin',
             'email' => 'chuck@norris.com',
             'password' => Hash::make('secret')
         ]);
 
+    }
+
+}
+
+class RoleSeeder extends Seeder {
+
+    public function run()
+    {
+        Role::create([
+            'name' => 'PageEditor'
+        ]);
+
+        Role::create([
+            'name' => 'ContentEditor'
+        ]);
+
+    }
+
+}
+
+class PermissionSeeder extends Seeder {
+
+    public function run()
+    {
+        Permission::create([
+            'name' => 'edit pages'
+        ]);
+
+        Permission::create([
+            'name' => 'edit contents'
+        ]);
+
+    }
+
+}
+
+class SetPermissionSeeder extends Seeder {
+
+    public function run()
+    {
+        # connect page permissions to group
+        $pageEditorRole = Role::where('name', 'PageEditor')->first();
+        $pageEditorRole->givePermissionTo('edit pages');
+
+        # connect content permissions to group
+        $ContentEditorRole = Role::where('name', 'ContentEditor')->first();
+        $ContentEditorRole->givePermissionTo('edit contents');
+
+        # set admin user to Editor groups.
+        $user = \App\User::find(1);
+        $user->assignRole('PageEditor', 'ContentEditor');
     }
 
 }
