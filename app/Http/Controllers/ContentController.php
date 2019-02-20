@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ContentController extends Controller
 {
@@ -59,6 +60,7 @@ class ContentController extends Controller
         $content->status = false;
 
         $content->save();
+        Cache::flush();
 
         if(isset($content->id)) {
             return redirect('/contents/'.$content->id);
@@ -157,6 +159,8 @@ class ContentController extends Controller
         $content->pages()->sync($request->pages);
         $content->save();
 
+        Cache::flush();
+
         return redirect('/contents');
     }
 
@@ -173,6 +177,8 @@ class ContentController extends Controller
         }
 
         $content->delete();
+        Cache::flush();
+
         return redirect('/contents');
     }
 

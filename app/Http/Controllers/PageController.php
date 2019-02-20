@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
@@ -54,6 +55,8 @@ class PageController extends Controller
         $page->title = $request->title;
         $page->description = $request->description;
         $page->save();
+
+        Cache::flush();
 
         return redirect('/pages');
     }
@@ -110,6 +113,8 @@ class PageController extends Controller
         $page->description = $request->description;
         $page->save();
 
+        Cache::flush();
+
         return redirect('/pages');
     }
 
@@ -126,6 +131,8 @@ class PageController extends Controller
         }
 
         $page->delete();
+        Cache::flush();
+
         return redirect('/pages');
     }
 }
