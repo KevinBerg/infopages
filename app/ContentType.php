@@ -13,6 +13,8 @@ class ContentType extends Model
      */
     protected $table = 'content_types';
 
+    protected $fillable = ['title', 'description'];
+
     public function contents()
     {
         return $this->belongsToMany('App\Content');

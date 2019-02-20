@@ -37,6 +37,11 @@ class ContentTypeSeeder extends Seeder {
             'description' => 'Text with image'
         ]);
 
+        App\ContentType::create([
+            'title' => 'twitter_timeline',
+            'description' => 'A list timeline displays the latest Tweets from a curated, public list of Twitter accounts. The timeline includes a header displaying the list’s name, description, and curator. Create lists on Twitter.com, the Twitter app, or in TweetDeck, learn more here.'
+        ]);
+
     }
 
 }

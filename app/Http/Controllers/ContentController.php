@@ -76,10 +76,6 @@ class ContentController extends Controller
      */
     public function show(Request $request, Content $content)
     {
-
-        dd($request->user()->getRoleNames());
-
-
         if( ! $request->user()->hasPermissionTo('edit contents')) {
             abort(403);
         }
