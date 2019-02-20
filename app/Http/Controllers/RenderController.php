@@ -40,8 +40,6 @@ class RenderController extends Controller
                         return \App\RenderedPageContent::where('page_id', $this->currentPage->id)->first();
                     });
 
-                   # $renderedPageContent = \App\RenderedPageContent::where('page_id', $this->currentPage->id)->first();
-
                     if($renderedPageContent) {
 
                         # remember the last rendered content.
