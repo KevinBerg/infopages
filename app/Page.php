@@ -24,4 +24,9 @@ class Page extends Model
         return $this->belongsToMany(Content::class)->withTimestamps();
     }
 
+    public function getContentsCacheIndex()
+    {
+        return $this->title.'_cached_contents';
+    }
+
 }

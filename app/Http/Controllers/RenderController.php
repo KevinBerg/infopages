@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Page;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RenderController extends Controller
 {
+
+    private $currentPage;
+
     /**
      * Creates the final view (rendered Page with contents)
      * @param $pageTitle the title of the page object.
@@ -21,43 +25,55 @@ class RenderController extends Controller
 
             if($page) {
 
-                # get the page contents from the content_pages table.
-                $contents = $page->contents;
+                $this->currentPage = $page;
 
-                if($contents) {
+                # retrieve filtered contents from cache
+                $contents = Cache::rememberForever($page->getContentsCacheIndex(), function () {
 
-                    # filter active contents.
-                    $contents = $contents->where('status', 1);
+                    $page = $this->currentPage;
 
-                    # find current highest priority
-                    $currentHighestPrio = 3;
-                    foreach($contents as $key => $content) {
-                        if($content->priority < $currentHighestPrio) {
-                            $currentHighestPrio = $content->priority;
-                            # 1 is the highes priority. Break if exists one content with highes prio.
-                            if($currentHighestPrio === 1) {
-                                break;
+                    # get the page contents from the content_pages table.
+                    $contents = $page->contents;
+
+                    if($contents) {
+
+                        # filter active contents.
+                        $contents = $contents->where('status', 1);
+
+                        # find current highest priority
+                        $currentHighestPrio = 3;
+                        foreach($contents as $key => $content) {
+                            if($content->priority < $currentHighestPrio) {
+                                $currentHighestPrio = $content->priority;
+                                # 1 is the highes priority. Break if exists one content with highes prio.
+                                if($currentHighestPrio === 1) {
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    # filter by highest priority
-                    foreach( $contents as $key => $content) {
-                        if($content->priority < $currentHighestPrio) {
-                            $contents->forget($key);
+                        # filter by highest priority
+                        foreach( $contents as $key => $content) {
+                            if($content->priority < $currentHighestPrio) {
+                                $contents->forget($key);
+                            }
                         }
-                    }
 
-                    # filter inactives by runtime
-                    foreach($contents as $key => $content) {
-                        $compareDate = $content->created_at->addDays($content->runtime);
-                        if(Carbon::now()->gt($compareDate)){
-                           $contents->forget($key);
+                        # filter inactives by runtime
+                        foreach($contents as $key => $content) {
+                            $compareDate = $content->created_at->addDays($content->runtime);
+                            if(Carbon::now()->gt($compareDate)){
+                                $contents->forget($key);
+                            }
                         }
-                    }
-                }
 
-                if($contents->count()) {
+                        return $contents;
+
+                    }
+
+                });
+
+                if(is_object($contents) && $contents->count()) {
 
                     # try to find a existing entry in the RenderedPageContent table for this page.
                     $renderedPageContent = \App\RenderedPageContent::where('page_id', $page->id)->first();
