@@ -21,7 +21,9 @@
 </div>
 <script>
     $(document).ready(function(){
-        $('html, body').animate({ scrollTop: 15000 }, 250000, "linear");
+        setTimeout(function() {
+            $('html, body').animate({ scrollTop: 15000 }, 150000, "linear");
+        }, 3000);
     });
 </script>
 </body>
