@@ -30,12 +30,19 @@ class Content extends Model
         return $this->hasOne('App\ContentType');
     }
 
-    public function getImageStoragePath() {
+    public function getImageStoragePath()
+    {
         return public_path().'/uploads/contents/'.$this->id.'/image/';
     }
 
-    public function getImagePath(){
+    public function getImagePath()
+    {
         return '/uploads/contents/'.$this->id.'/image/'.$this->image;
+    }
+
+    public function getContentTypeCacheIndex()
+    {
+        return 'content_type_'.$this->id;
     }
 
 }

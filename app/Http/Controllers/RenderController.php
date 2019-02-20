@@ -11,6 +11,7 @@ class RenderController extends Controller
 {
 
     private $currentPage;
+    private $currentContent;
 
     /**
      * Creates the final view (rendered Page with contents)
@@ -35,7 +36,11 @@ class RenderController extends Controller
                 if(is_object($contents) && $contents->count()) {
 
                     # try to find a existing entry in the RenderedPageContent table for this page.
-                    $renderedPageContent = \App\RenderedPageContent::where('page_id', $page->id)->first();
+                    $renderedPageContent = Cache::rememberForever($page->getRenderedPageCacheIndex(), function () {
+                        return \App\RenderedPageContent::where('page_id', $this->currentPage->id)->first();
+                    });
+
+                   # $renderedPageContent = \App\RenderedPageContent::where('page_id', $this->currentPage->id)->first();
 
                     if($renderedPageContent) {
 
@@ -61,14 +66,21 @@ class RenderController extends Controller
 
                     }
 
+                    $this->currentContent = $content;
                     $renderedPageContent->content_id = $content->id;
                     $renderedPageContent->updated_at = now();
                     $renderedPageContent->save();
 
-                    $contentType = \App\ContentType::find($content->type);
+                    Cache::forever($page->getRenderedPageCacheIndex(), $renderedPageContent);
+
+                    $contentType = Cache::rememberForever($content->getContentTypeCacheIndex(), function () {
+                        return \App\ContentType::find($this->currentContent->type);
+                    });
 
                     if($contentType && !empty($contentType->title)) {
+
                         return view('templates.'.$contentType->title, compact('content'));
+
                     } else {
                         abort(503, 'Sorry, the content has an invalid type.');
                     }

@@ -30,6 +30,11 @@ class Page extends Model
         return $this->title.'_cached_contents';
     }
 
+    public function getRenderedPageCacheIndex()
+    {
+        return 'page_'.$this->id.'_rendered_page_content';
+    }
+
     public function getFilteredContents()
     {
 
