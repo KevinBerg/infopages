@@ -14,8 +14,6 @@ class RenderController extends Controller
      */
     public function render(String $pageTitle) {
 
-        # ToDo use content priority!!
-
         # just accept alphanumeric strings for page titles.
         if(ctype_alnum($pageTitle)) {
 
