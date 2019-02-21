@@ -21,3 +21,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('user', 'api\AuthController@user');
     });
 });
+
+Route::group(['prefix' => 'page'], function () {
+    Route::get('urls', 'api\PageController@urls');
+});
