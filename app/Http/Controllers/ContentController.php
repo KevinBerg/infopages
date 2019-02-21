@@ -182,6 +182,23 @@ class ContentController extends Controller
         return redirect('/contents');
     }
 
+    public function preview(Content $content)
+    {
+
+        $contentType = Cache::rememberForever($content->getContentTypeCacheIndex(), function (Content $content) {
+            return \App\ContentType::find($content->type);
+        });
+
+        if($contentType && !empty($contentType->title)) {
+
+            return view('templates.'.$contentType->title, compact('content'));
+
+        } else {
+
+            abort(503, 'Sorry, the content has an invalid type.');
+        }
+    }
+
     private function getContentTypeTitle(Content $content) {
 
         $contentTypeTitle = false;
